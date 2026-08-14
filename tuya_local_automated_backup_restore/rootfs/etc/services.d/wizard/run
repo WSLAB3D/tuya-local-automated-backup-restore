@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bashio
+# =============================================================================
+# Tuya Local Automated Backup & Restore - setup wizard web UI
+# =============================================================================
+
+bashio::log.info "Starting Tuya Local setup wizard..."
+
+exec python3 /app/wizard.py

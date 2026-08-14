@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bashio
+# =============================================================================
+# Tuya Local Automated Backup & Restore - monitor service
+# Runs on a schedule to back up and restore tuya_local config entries.
+# =============================================================================
+
+bashio::log.info "Starting Tuya Local monitor..."
+
+exec python3 /app/monitor.py

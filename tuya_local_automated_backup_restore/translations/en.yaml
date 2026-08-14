@@ -1,0 +1,13 @@
+configuration:
+  backup_path:
+    name: Backup file path
+    description: Path to the JSON backup file. Defaults to /config/tuya_local_device_records.json.
+  check_interval_minutes:
+    name: Check interval (minutes)
+    description: How often to check for missing or new tuya_local devices.
+  auto_restore:
+    name: Automatically restore missing devices
+    description: Re-create tuya_local config entries that are missing but present in the backup.
+  auto_backup_new:
+    name: Automatically back up new devices
+    description: Add any new tuya_local config entries to the backup file.

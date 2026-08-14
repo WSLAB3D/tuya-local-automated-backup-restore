@@ -1,0 +1,31 @@
+name: "Tuya Local Automated Backup & Restore"
+version: "1.0.0"
+slug: "tuya_local_automated_backup_restore"
+description: >-
+  Automatically back up and restore your tuya_local (LocalTuya) device
+  configuration entries. Imports existing tuya_local devices for backup.
+url: "https://github.com/<your-username>/tuya-local-automated-backup-restore"
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+homeassistant_api: true
+hassio_api: false
+map:
+  - "config:rw"
+options:
+  backup_path: "/config/tuya_local_device_records.json"
+  check_interval_minutes: 60
+  auto_restore: true
+  auto_backup_new: true
+schema:
+  backup_path: str
+  check_interval_minutes: int(1,1440)
+  auto_restore: bool
+  auto_backup_new: bool
+ingress: true
+ingress_port: 8099
+panel_title: "Tuya Local Backup"
+panel_icon: "mdi:backup-restore"
