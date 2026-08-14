@@ -4,7 +4,7 @@ slug: "tuya_local_automated_backup_restore"
 description: >-
   Automatically back up and restore your tuya_local (LocalTuya) device
   configuration entries. Imports existing tuya_local devices for backup.
-url: "https://github.com/<your-username>/tuya-local-automated-backup-restore"
+url: "https://github.com/wslab3d/tuya-local-automated-backup-restore"
 arch:
   - amd64
   - aarch64

@@ -18,7 +18,7 @@ A Home Assistant add-on that automatically backs up and restores your `tuya_loca
 
 1. Add this repository to your Home Assistant Add-on Store:
    ```
-   https://github.com/<your-username>/tuya-local-automated-backup-restore
+   https://github.com/wslab3d/tuya-local-automated-backup-restore
    ```
 2. Install **Tuya Local Automated Backup & Restore**.
 3. Configure the backup path and check interval, then start the add-on.
@@ -39,7 +39,7 @@ The add-on reads `/config/.storage/core.config_entries` directly to inspect `tuy
 
 ## Sharing
 
-This repository is structured so you can publish it directly to GitHub and share it with the Home Assistant community. Just update the placeholder GitHub URLs in `repository.json`, `config.yaml`, and `README.md` to point to your repository.
+This repository is structured so you can share it with the Home Assistant community.
 
 ## License
 
