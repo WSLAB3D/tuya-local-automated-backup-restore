@@ -39,8 +39,22 @@ else:
     SECRET_PATH.parent.mkdir(parents=True, exist_ok=True)
     SECRET_PATH.write_text(SECRET_KEY, encoding="utf-8")
 
+class IngressMiddleware:
+    """Make Flask URL generation work behind the Home Assistant Ingress proxy."""
+
+    def __init__(self, app):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        ingress_path = environ.get("HTTP_X_INGRESS_PATH", "")
+        if ingress_path:
+            environ["SCRIPT_NAME"] = ingress_path.rstrip("/")
+        return self.app(environ, start_response)
+
+
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
+app.wsgi_app = IngressMiddleware(app.wsgi_app)
 
 
 def get_backup_path() -> Path:
