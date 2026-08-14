@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Replaced Flask's development server with `waitress` for production use in Ingress.
+
 ## 1.0.1
 
 - Added Home Assistant Ingress path handling so the wizard's links work when opened through the HA sidebar.

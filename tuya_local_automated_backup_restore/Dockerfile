@@ -15,4 +15,4 @@ LABEL \
   io.hass.name="Tuya Local Automated Backup & Restore" \
   io.hass.description="Back up and restore tuya_local config entries" \
   io.hass.type="addon" \
-  io.hass.version="1.0.1"
+  io.hass.version="1.0.2"

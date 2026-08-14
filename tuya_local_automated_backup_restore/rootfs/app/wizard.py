@@ -303,4 +303,5 @@ def api_backup() -> Any:
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8099)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8099, threads=4, ident="Tuya Local Backup")
