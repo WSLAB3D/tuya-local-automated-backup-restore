@@ -37,10 +37,6 @@ A Home Assistant add-on that automatically backs up and restores your `tuya_loca
 
 The add-on reads `/config/.storage/core.config_entries` directly to inspect `tuya_local` entries. If a device in the backup is missing from the live entries, it drives the Home Assistant config flow API to re-add it using the stored `device_id`, `local_key`, `host`, and `type`.
 
-## Sharing
-
-This repository is structured so you can share it with the Home Assistant community.
-
 ## License
 
 MIT
