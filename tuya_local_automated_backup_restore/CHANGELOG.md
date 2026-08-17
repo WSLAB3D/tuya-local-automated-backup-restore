@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+
+- Reverted map option back to "config:rw" to fix tuya_local integration detection
+
 ## 0.0.3
 
 - Fixed deprecated map option (config -> homeassistant_config)
