@@ -285,14 +285,14 @@ def add_new_entries(
     return added
 
 
-def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> list[dict[str, Any]]:
+def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> tuple[int, list[dict[str, Any]]]:
     """Discover Tuya devices on the local network using Tinytuya.
     
     Args:
         existing_device_ids: Set of device IDs already in Tuya Local to filter out
         
     Returns:
-        List of discovered devices with basic information
+        Tuple of (total_devices_found, list_of_new_devices)
     """
     if existing_device_ids is None:
         existing_device_ids = set()
@@ -329,7 +329,7 @@ def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> list[d
     except Exception as exc:
         _LOGGER.error("Error during Tuya device discovery: %s", exc)
         
-    return discovered
+    return len(devices), discovered
 
 
 def get_available_gateways() -> list[dict[str, Any]]:

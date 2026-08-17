@@ -225,7 +225,7 @@ TEMPLATES: dict[str, str] = {
     "discover.html": """{% extends "base.html" %}
 {% block content %}
 <h1>Discover Tuya Devices</h1>
-<p class="muted">Devices discovered on your local network that are not yet in Tuya Local.</p>
+<p class="muted">Scan results: Found {{ total_found }} Tuya devices total, {{ devices|length }} new devices not yet in Tuya Local.</p>
 
 <div class="alert info">
   <strong>Note:</strong> This feature scans your local network for Tuya devices that are not yet in Tuya Local.
@@ -464,12 +464,12 @@ def discover_devices() -> Any:
         existing_ids = {entry.get("data", {}).get("device_id") for entry in entries.values()}
         
         # Discover devices
-        discovered = discover_tuya_devices(existing_ids)
+        total_found, discovered = discover_tuya_devices(existing_ids)
         
         # Get available gateways
         gateways = get_available_gateways()
         
-        return render_template("discover.html", devices=discovered, gateways=gateways)
+        return render_template("discover.html", devices=discovered, gateways=gateways, total_found=total_found)
         
     except Exception as exc:
         flash(f"Error discovering devices: {exc}", "error")

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.5
+
+- Enhanced device discovery to show total devices found vs new devices
+- Updated UI to display scan results with device counts
+- Improved discovery function to return both total and new device counts
+
 ## 0.0.4
 
 - Reverted map option back to "config:rw" to fix tuya_local integration detection
