@@ -1,4 +1,4 @@
-"""Shared helpers for the Tuya Local Backup & Restore add-on."""
+"""Shared helpers for the Tuya Local Backup & Restore app."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ HA_API_BASE = "http://supervisor/core/api"
 
 
 def load_options() -> dict[str, Any]:
-    """Load the add-on options written by the Supervisor."""
+    """Load the app options written by the Supervisor."""
     if OPTIONS_PATH.exists():
         with OPTIONS_PATH.open("r", encoding="utf-8") as f:
             return json.load(f)

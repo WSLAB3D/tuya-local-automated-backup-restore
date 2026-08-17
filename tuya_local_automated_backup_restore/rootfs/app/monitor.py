@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Scheduled monitor for the Tuya Local Backup & Restore add-on."""
+"""Scheduled monitor for the Tuya Local Backup & Restore app."""
 
 from __future__ import annotations
 

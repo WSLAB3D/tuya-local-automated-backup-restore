@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ingress web UI for the Tuya Local Backup & Restore add-on."""
+"""Ingress web UI for the Tuya Local Backup & Restore app."""
 
 from __future__ import annotations
 
@@ -134,7 +134,7 @@ TEMPLATES: dict[str, str] = {
 <h1>Tuya Local Automated Backup & Restore</h1>
 <p class="muted">Back up and restore your tuya_local (LocalTuya) device configuration entries.</p>
 {% if not tuya_local_installed %}
-  <div class="alert error">The tuya_local integration was not found. Install it via HACS and add at least one device before using this add-on.</div>
+  <div class="alert error">The tuya_local integration was not found. Install it via HACS and add at least one device before using this app.</div>
 {% elif device_count == 0 %}
   <div class="alert info">No backup devices found yet. Set up your devices in the tuya_local integration, then use the setup wizard to import them.</div>
   <a class="button" href="{{ url_for('setup') }}">Open setup wizard</a>
@@ -174,7 +174,7 @@ TEMPLATES: dict[str, str] = {
     "setup.html": """{% extends "base.html" %}
 {% block content %}
 <h1>Setup wizard</h1>
-<p class="muted">This add-on backs up and restores tuya_local config entries. It does not set up new Tuya devices from scratch.</p>
+<p class="muted">This app backs up and restores tuya_local config entries. It does not set up new Tuya devices from scratch.</p>
 
 {% if not tuya_local_installed %}
   <div class="alert error">
@@ -190,7 +190,7 @@ TEMPLATES: dict[str, str] = {
   <p class="muted">Use the Home Assistant tuya_local integration (or the tinytuya wizard) to add each device first. Once they are working, return here.</p>
 
   <h2>2. Import existing tuya_local entries</h2>
-  <p class="muted">Click below to copy the current tuya_local config entries into the backup file. The add-on will keep this backup in sync and restore missing devices automatically.</p>
+  <p class="muted">Click below to copy the current tuya_local config entries into the backup file. The app will keep this backup in sync and restore missing devices automatically.</p>
   <form method="post" action="{{ url_for('import_ha') }}">
     <button type="submit">Import from Home Assistant</button>
   </form>

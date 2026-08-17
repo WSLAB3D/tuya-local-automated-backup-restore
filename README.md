@@ -1,11 +1,11 @@
 # Tuya Local Automated Backup & Restore
 
-A Home Assistant add-on that automatically backs up and restores your `tuya_local` (LocalTuya) device configuration entries.
+A Home Assistant app that automatically backs up and restores your `tuya_local` (LocalTuya) device configuration entries.
 
 ## Requirements
 
 - The `tuya_local` custom integration must be installed in Home Assistant (e.g., via HACS) and have at least one device configured.
-- This add-on does not set up new Tuya devices from scratch; it only backs up and restores existing `tuya_local` config entries.
+- This app does not set up new Tuya devices from scratch; it only backs up and restores existing `tuya_local` config entries.
 
 ## What it does
 
@@ -16,13 +16,13 @@ A Home Assistant add-on that automatically backs up and restores your `tuya_loca
 
 ## Installation
 
-1. Add this repository to your Home Assistant Add-on Store:
+1. Add this repository to your Home Assistant App Store:
    ```
    https://github.com/wslab3d/tuya-local-automated-backup-restore
    ```
 2. Install **Tuya Local Automated Backup & Restore**.
-3. Configure the backup path and check interval, then start the add-on.
-4. Open the add-on's **Ingress** panel to run the setup wizard or import devices.
+3. Configure the backup path and check interval, then start the app.
+4. Open the app's **Ingress** panel to run the setup wizard or import devices.
 
 ## Configuration
 
@@ -35,7 +35,7 @@ A Home Assistant add-on that automatically backs up and restores your `tuya_loca
 
 ## How the restore works
 
-The add-on reads `/config/.storage/core.config_entries` directly to inspect `tuya_local` entries. If a device in the backup is missing from the live entries, it drives the Home Assistant config flow API to re-add it using the stored `device_id`, `local_key`, `host`, and `type`.
+The app reads `/config/.storage/core.config_entries` directly to inspect `tuya_local` entries. If a device in the backup is missing from the live entries, it drives the Home Assistant config flow API to re-add it using the stored `device_id`, `local_key`, `host`, and `type`.
 
 ## License
 
