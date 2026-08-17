@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.7
+
+- Removed privileged mode to avoid repository detection issues
+- Keeping network: host for basic network access
+
 ## 0.0.6
 
 - Added privileged mode for enhanced network access required for device discovery
