@@ -15,6 +15,7 @@ homeassistant_api: true
 hassio_api: false
 map:
   - "config:rw"
+network: host
 options:
   backup_path: "/config/tuya_local_device_records.json"
   check_interval_minutes: 60
