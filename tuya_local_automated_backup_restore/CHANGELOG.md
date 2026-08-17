@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.3
+
+- Fixed deprecated map option (config -> homeassistant_config)
+- Updated repository URL to correct capitalization (WSLAB3D)
+
 ## 0.0.2
 
 - Fixed misleading warning message about local_key requirements
