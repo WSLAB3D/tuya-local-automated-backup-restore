@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import requests
+import tinytuya
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -282,6 +283,80 @@ def add_new_entries(
         _LOGGER.info("Added new device to backup: %s (%s)", new_record["title"], key)
         added.append(f"{new_record['title']}: added to backup")
     return added
+
+
+def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> list[dict[str, Any]]:
+    """Discover Tuya devices on the local network using Tinytuya.
+    
+    Args:
+        existing_device_ids: Set of device IDs already in Tuya Local to filter out
+        
+    Returns:
+        List of discovered devices with basic information
+    """
+    if existing_device_ids is None:
+        existing_device_ids = set()
+    
+    discovered = []
+    
+    try:
+        # Use Tinytuya's device discovery
+        devices = tinytuya.deviceDiscovery(False)
+        
+        for dev in devices:
+            dev_id = dev.get("id", "")
+            # Skip devices already in Tuya Local
+            if dev_id in existing_device_ids:
+                _LOGGER.info("Skipping device %s - already in Tuya Local", dev_id)
+                continue
+            
+            # Extract device information
+            device_data = {
+                "device_id": dev_id,
+                "ip": dev.get("ip", ""),
+                "name": dev.get("name", f"Device {dev_id}"),
+                "product_key": dev.get("productKey", ""),
+                "version": dev.get("version", ""),
+                "is_gateway": dev.get("gwId", "") != "",  # Has gateway ID if it's a sub-device
+                "type": dev.get("type", "unknown"),
+            }
+            
+            _LOGGER.info("Discovered Tuya device: %s at %s", device_data["name"], device_data["ip"])
+            discovered.append(device_data)
+            
+    except Exception as exc:
+        _LOGGER.error("Error during Tuya device discovery: %s", exc)
+        
+    return discovered
+
+
+def get_available_gateways() -> list[dict[str, Any]]:
+    """Get list of available Tuya gateways from existing Tuya Local entries.
+    
+    Returns:
+        List of gateway devices with their information
+    """
+    gateways = []
+    
+    try:
+        entries = get_config_entries()
+        for entry_id, entry in entries.items():
+            data = entry.get("data", {})
+            # Check if this device is a gateway (has device_cid or is marked as gateway)
+            if data.get("device_cid") or entry.get("title", "").lower().find("gateway") != -1:
+                gateway_info = {
+                    "entry_id": entry_id,
+                    "title": entry.get("title", ""),
+                    "device_id": data.get("device_id", ""),
+                    "host": data.get("host", ""),
+                }
+                gateways.append(gateway_info)
+                _LOGGER.info("Found gateway: %s (%s)", gateway_info["title"], gateway_info["device_id"])
+                
+    except Exception as exc:
+        _LOGGER.warning("Error getting gateways: %s", exc)
+        
+    return gateways
 
 
 def run_backup_restore(

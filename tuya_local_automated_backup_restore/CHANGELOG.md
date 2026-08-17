@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.4
+
+- Added device discovery feature to import devices from Tuya Cloud
+- Added JSON export/import functionality for backup files
+- Added Tinytuya dependency for local network device discovery
+- Added UI for discovered devices with template and gateway selection
+- Auto-runs backup after successful device addition
+
 ## 1.0.3
 
 - Fixed setup wizard not detecting tuya_local installation when clicking "Import more devices"
