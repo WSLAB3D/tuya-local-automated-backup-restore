@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.9
+
+- Added specific IP range scanning to forcescan parameter
+- Targeting 10.19.100.0/24 network range for direct scanning
+
 ## 0.0.8
 
 - Added UDP and TCP ports for Tuya device discovery (6666, 6667, 6668, 7000)
