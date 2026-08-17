@@ -1,5 +1,5 @@
 name: "Tuya Local Automated Backup & Restore"
-version: "1.0.6"
+version: "1.0.0"
 slug: "tuya_local_automated_backup_restore"
 description: >-
   Automatically back up and restore your tuya_local (LocalTuya) device

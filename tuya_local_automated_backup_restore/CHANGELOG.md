@@ -1,10 +1,13 @@
 # Changelog
 
-## 1.0.6
+## 1.0.0
 
-- Fixed Tinytuya device discovery function name (deviceScan instead of deviceDiscovery)
-
-## 1.0.5
+- Initial public release
+- Device discovery from Tuya Cloud using Tinytuya
+- JSON export/import for backup files
+- Template and gateway selection for discovered devices
+- Auto-backup after successful device addition
+- Fixed Tinytuya device discovery function name
 
 - Added host network access for device discovery functionality
 
