@@ -301,8 +301,8 @@ def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> tuple[
     
     try:
         _LOGGER.info("Starting Tuya device discovery...")
-        # Use Tinytuya's device discovery
-        devices = tinytuya.deviceScan(verbose=False, maxretry=15, poll=False)
+        # Try with polling and force scan enabled
+        devices = tinytuya.deviceScan(verbose=False, maxretry=30, poll=True, forcescan=True)
         _LOGGER.info("Device scan completed. Found %d devices total", len(devices))
         
         for dev_id, dev_info in devices.items():

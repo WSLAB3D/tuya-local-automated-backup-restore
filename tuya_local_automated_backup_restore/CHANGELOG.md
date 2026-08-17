@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.8
+
+- Added UDP and TCP ports for Tuya device discovery (6666, 6667, 6668, 7000)
+- Enabled polling and force scan in Tinytuya discovery
+- Increased maxretry to 30 for more thorough network scanning
+
 ## 0.0.7
 
 - Removed privileged mode to avoid repository detection issues
