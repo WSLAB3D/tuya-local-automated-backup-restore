@@ -1,8 +1,8 @@
 # Changelog
 
-## 1.0.0
+## 0.0.1
 
-- Initial public release
+- Initial release
 - Device discovery from Tuya Cloud using Tinytuya
 - JSON export/import for backup files
 - Template and gateway selection for discovered devices
