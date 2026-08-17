@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.6
+
+- Added privileged mode for enhanced network access required for device discovery
+- Logs show discovery running but finding 0 devices, so adding privileged mode
+
 ## 0.0.5
 
 - Enhanced device discovery to show total devices found vs new devices

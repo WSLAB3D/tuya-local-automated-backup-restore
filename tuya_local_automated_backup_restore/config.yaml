@@ -1,5 +1,5 @@
 name: "Tuya Local Automated Backup & Restore"
-version: "0.0.5"
+version: "0.0.6"
 slug: "tuya_local_automated_backup_restore"
 description: >-
   Automatically back up and restore your tuya_local (LocalTuya) device
@@ -16,6 +16,7 @@ hassio_api: false
 map:
   - "config:rw"
 network: host
+privileged: true
 options:
   backup_path: "/config/tuya_local_device_records.json"
   check_interval_minutes: 60
