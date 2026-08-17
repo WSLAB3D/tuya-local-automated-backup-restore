@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0
+
+- Made network range configurable via discovery_network_range option
+- Removed hardcoded network range, now user-configurable
+- Added fallback to broadcast scan if no network range configured
+- Users can now configure their specific network for optimal discovery
+
 ## 0.0.9
 
 - Added specific IP range scanning to forcescan parameter

@@ -301,13 +301,19 @@ def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> tuple[
     
     try:
         _LOGGER.info("Starting Tuya device discovery...")
-        # Get configured network range or use default
+        # Get configured network range
         options = load_options()
-        network_range = options.get("discovery_network_range", "10.19.100.0/24")
-        _LOGGER.info("Scanning network range: %s", network_range)
+        network_range = options.get("discovery_network_range", "").strip()
         
-        # Try with polling and force scan on specific network range
-        devices = tinytuya.deviceScan(verbose=False, maxretry=30, poll=True, forcescan=[network_range])
+        if not network_range:
+            _LOGGER.warning("No network range configured in discovery_network_range option. Discovery may not work.")
+            # Fall back to broadcast scan
+            devices = tinytuya.deviceScan(verbose=False, maxretry=30, poll=True)
+        else:
+            _LOGGER.info("Scanning network range: %s", network_range)
+            # Use force scan on specific network range
+            devices = tinytuya.deviceScan(verbose=False, maxretry=30, poll=True, forcescan=[network_range])
+        
         _LOGGER.info("Device scan completed. Found %d devices total", len(devices))
         
         for dev_id, dev_info in devices.items():
