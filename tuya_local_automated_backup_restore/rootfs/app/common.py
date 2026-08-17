@@ -301,10 +301,9 @@ def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> list[d
     
     try:
         # Use Tinytuya's device discovery
-        devices = tinytuya.deviceDiscovery(False)
+        devices = tinytuya.deviceScan(verbose=False, maxretry=15, poll=False)
         
-        for dev in devices:
-            dev_id = dev.get("id", "")
+        for dev_id, dev_info in devices.items():
             # Skip devices already in Tuya Local
             if dev_id in existing_device_ids:
                 _LOGGER.info("Skipping device %s - already in Tuya Local", dev_id)
@@ -313,12 +312,12 @@ def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> list[d
             # Extract device information
             device_data = {
                 "device_id": dev_id,
-                "ip": dev.get("ip", ""),
-                "name": dev.get("name", f"Device {dev_id}"),
-                "product_key": dev.get("productKey", ""),
-                "version": dev.get("version", ""),
-                "is_gateway": dev.get("gwId", "") != "",  # Has gateway ID if it's a sub-device
-                "type": dev.get("type", "unknown"),
+                "ip": dev_info.get("ip", ""),
+                "name": dev_info.get("name", f"Device {dev_id}"),
+                "product_key": dev_info.get("productKey", ""),
+                "version": dev_info.get("version", ""),
+                "is_gateway": dev_info.get("gwId", "") != "",  # Has gateway ID if it's a sub-device
+                "type": dev_info.get("type", "unknown"),
             }
             
             _LOGGER.info("Discovered Tuya device: %s at %s", device_data["name"], device_data["ip"])

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6
+
+- Fixed Tinytuya device discovery function name (deviceScan instead of deviceDiscovery)
+
 ## 1.0.5
 
 - Added host network access for device discovery functionality
