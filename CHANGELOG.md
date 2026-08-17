@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+
+- Fixed setup wizard not detecting tuya_local installation when clicking "Import more devices"
+
 ## 1.0.2
 
 - Replaced Flask's development server with `waitress` for production use in Ingress.
