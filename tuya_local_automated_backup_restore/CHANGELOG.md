@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- Added host network access for device discovery functionality
+
 ## 1.0.4
 
 - Added device discovery feature to import devices from Tuya Cloud
