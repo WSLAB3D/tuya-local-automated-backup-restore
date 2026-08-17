@@ -237,7 +237,8 @@ def status() -> Any:
 
 @app.route("/setup")
 def setup() -> Any:
-    return render_template("setup.html")
+    ctx = get_status_context()
+    return render_template("setup.html", **ctx)
 
 
 @app.route("/import_ha", methods=["POST"])
