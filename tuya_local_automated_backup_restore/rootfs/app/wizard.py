@@ -228,9 +228,9 @@ TEMPLATES: dict[str, str] = {
 <p class="muted">Devices discovered on your local network that are not yet in Tuya Local.</p>
 
 <div class="alert info">
-  <strong>Important:</strong> This feature discovers devices but requires the local_key for each device. 
-  You'll need to obtain the local_key from the Tuya/Smart Life app or use Tinytuya to extract it. 
-  Without the local_key, devices cannot be added to Tuya Local.
+  <strong>Note:</strong> This feature scans your local network for Tuya devices that are not yet in Tuya Local.
+  You'll need to provide the local_key for each device you want to add. The local_key can be obtained
+  from the Tuya/Smart Life app or by using Tinytuya's wizard tool (<code>python -m tinytuya wizard</code>).
 </div>
 
 {% if devices %}

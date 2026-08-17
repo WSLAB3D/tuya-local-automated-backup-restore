@@ -300,10 +300,13 @@ def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> list[d
     discovered = []
     
     try:
+        _LOGGER.info("Starting Tuya device discovery...")
         # Use Tinytuya's device discovery
         devices = tinytuya.deviceScan(verbose=False, maxretry=15, poll=False)
+        _LOGGER.info("Device scan completed. Found %d devices total", len(devices))
         
         for dev_id, dev_info in devices.items():
+            _LOGGER.info("Processing device: %s - Info: %s", dev_id, dev_info)
             # Skip devices already in Tuya Local
             if dev_id in existing_device_ids:
                 _LOGGER.info("Skipping device %s - already in Tuya Local", dev_id)

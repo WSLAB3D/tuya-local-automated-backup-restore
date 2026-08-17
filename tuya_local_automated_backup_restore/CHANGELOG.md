@@ -1,6 +1,18 @@
 # Changelog
 
+## 0.0.2
+
+- Fixed misleading warning message about local_key requirements
+- Added debug logging for device discovery troubleshooting
+
 ## 0.0.1
+
+- Initial release
+- Device discovery from Tuya Cloud using Tinytuya
+- JSON export/import for backup files
+- Template and gateway selection for discovered devices
+- Auto-backup after successful device addition
+- Fixed Tinytuya device discovery function name
 
 - Initial release
 - Device discovery from Tuya Cloud using Tinytuya
