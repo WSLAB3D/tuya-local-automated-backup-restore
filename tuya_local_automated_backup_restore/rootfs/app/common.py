@@ -10,7 +10,6 @@ from pathlib import Path
 from typing import Any
 
 import requests
-import tinytuya
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -283,93 +282,6 @@ def add_new_entries(
         _LOGGER.info("Added new device to backup: %s (%s)", new_record["title"], key)
         added.append(f"{new_record['title']}: added to backup")
     return added
-
-
-def discover_tuya_devices(existing_device_ids: set[str] | None = None) -> tuple[int, list[dict[str, Any]]]:
-    """Discover Tuya devices on the local network using Tinytuya.
-    
-    Args:
-        existing_device_ids: Set of device IDs already in Tuya Local to filter out
-        
-    Returns:
-        Tuple of (total_devices_found, list_of_new_devices)
-    """
-    if existing_device_ids is None:
-        existing_device_ids = set()
-    
-    discovered = []
-    
-    try:
-        _LOGGER.info("Starting Tuya device discovery...")
-        # Get configured network range
-        options = load_options()
-        network_range = options.get("discovery_network_range", "").strip()
-        
-        if not network_range:
-            _LOGGER.warning("No network range configured in discovery_network_range option. Discovery may not work.")
-            # Fall back to broadcast scan
-            devices = tinytuya.deviceScan(verbose=False, maxretry=30, poll=True)
-        else:
-            _LOGGER.info("Scanning network range: %s", network_range)
-            # Use force scan on specific network range
-            devices = tinytuya.deviceScan(verbose=False, maxretry=30, poll=True, forcescan=[network_range])
-        
-        _LOGGER.info("Device scan completed. Found %d devices total", len(devices))
-        
-        for dev_id, dev_info in devices.items():
-            _LOGGER.info("Processing device: %s - Info: %s", dev_id, dev_info)
-            # Skip devices already in Tuya Local
-            if dev_id in existing_device_ids:
-                _LOGGER.info("Skipping device %s - already in Tuya Local", dev_id)
-                continue
-            
-            # Extract device information
-            device_data = {
-                "device_id": dev_id,
-                "ip": dev_info.get("ip", ""),
-                "name": dev_info.get("name", f"Device {dev_id}"),
-                "product_key": dev_info.get("productKey", ""),
-                "version": dev_info.get("version", ""),
-                "is_gateway": dev_info.get("gwId", "") != "",  # Has gateway ID if it's a sub-device
-                "type": dev_info.get("type", "unknown"),
-            }
-            
-            _LOGGER.info("Discovered Tuya device: %s at %s", device_data["name"], device_data["ip"])
-            discovered.append(device_data)
-            
-    except Exception as exc:
-        _LOGGER.error("Error during Tuya device discovery: %s", exc)
-        
-    return len(devices), discovered
-
-
-def get_available_gateways() -> list[dict[str, Any]]:
-    """Get list of available Tuya gateways from existing Tuya Local entries.
-    
-    Returns:
-        List of gateway devices with their information
-    """
-    gateways = []
-    
-    try:
-        entries = get_config_entries()
-        for entry_id, entry in entries.items():
-            data = entry.get("data", {})
-            # Check if this device is a gateway (has device_cid or is marked as gateway)
-            if data.get("device_cid") or entry.get("title", "").lower().find("gateway") != -1:
-                gateway_info = {
-                    "entry_id": entry_id,
-                    "title": entry.get("title", ""),
-                    "device_id": data.get("device_id", ""),
-                    "host": data.get("host", ""),
-                }
-                gateways.append(gateway_info)
-                _LOGGER.info("Found gateway: %s (%s)", gateway_info["title"], gateway_info["device_id"])
-                
-    except Exception as exc:
-        _LOGGER.warning("Error getting gateways: %s", exc)
-        
-    return gateways
 
 
 def run_backup_restore(

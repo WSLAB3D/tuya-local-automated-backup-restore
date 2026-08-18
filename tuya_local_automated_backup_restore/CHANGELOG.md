@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0
+
+- Removed device discovery feature (will be implemented as separate custom component)
+- Removed Tinytuya dependency from requirements
+- Removed discovery-related UI and routes
+- Cleaned up config.yaml to remove discovery options
+- Focus on core backup/restore functionality
+
 ## 0.1.0
 
 - Made network range configurable via discovery_network_range option
